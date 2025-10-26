@@ -1,0 +1,55 @@
+﻿@page
+@model OCCUWebsite.Pages.StatusReports.IndexModel
+
+@{
+    ViewData["Title"] = "StatusReports";
+}
+
+<h2>Status Report</h2>
+
+<table class="table">
+    <tbody>
+        @foreach (var item in Model.StatusReports)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusName)
+                </td>
+                <td>
+                    <p class="statusValue">@Html.DisplayFor(modelItem => item.CurrentValue)</p>
+                    </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.StatusReports.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.StatusReports.HasNextPage ? "disabled" : "";
+}
+
+<script>
+ 
+
+     const nodeList = document.querySelectorAll(".statusValue");
+
+         for (let i = 0; i < nodeList.length; i++) {
+        var myElement = nodeList[i];
+      //  console("Value : " + myElement.innerTextValue);
+   if(myElement.innerText === "fail") {
+         myElement.style.textAlign = 'right';
+        myElement.style.color = 'red';
+     } 
+     else if (myElement.innerText === "warn") {
+          myElement.style.textAlign = 'center';
+           myElement.style.color = 'black';
+     }
+     else { // (myElement.innerTextValue === "pass"){
+
+           myElement.style.textAlign = 'left';
+            myElement.style.color = 'green';
+           }
+
+     }
+
+</script>
